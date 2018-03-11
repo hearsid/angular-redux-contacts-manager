@@ -1,16 +1,16 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import {HttpCacheService } from './http-cache.service';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app works';
 
-  constructor(private http: Http, private httpCacheService: HttpCacheService) {
+  constructor(private http: Http) {
 
   }
 

@@ -6,6 +6,9 @@ import 'rxjs/add/operator/switchMap';
 
 import { IContact } from '../models/contact.model';
 import { ContactService } from '../contact/contact.service';
+import { Observable } from 'rxjs/Observable';
+import { select } from '@angular-redux/store/lib/src/decorators/select';
+
 @Component({
 selector: 'app-contacts-list',
 templateUrl: './contacts-list.component.html',
@@ -14,10 +17,10 @@ templateUrl: './contacts-list.component.html',
 export class ContactsListComponent implements OnInit, OnDestroy{
 
     title = 'List of contacts';
-    contacts: IContact[];
     selectedContact: IContact;
     private subscription: Subscription;
-    private total_contacts : number;
+    private total_contacts: number;
+    @select('contacts') contacts: Observable<IContact[]>;
 
     constructor(private router: Router,
                 private contactService: ContactService,

@@ -5,15 +5,15 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 
-import { HttpCacheService } from './http-cache.service';
-import {CacheService, CacheStorageAbstract, CacheLocalStorage} from 'ng2-cache/ng2-cache';
-import { HeaderComponent } from './header/header.component';
-import { ContactComponent } from './contact/contact.component';
-import { ContactsListComponent } from './contacts-list/contacts-list.component';
-import { NewContactsComponent } from './new-contact/new-contact.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { ContactsListComponent } from './pages/contacts-list/contacts-list.component';
+import { NewContactsComponent } from './pages/new-contact/new-contact.component';
 import {AppRoutingModule} from "./app.routing.module";
-import {ContactService} from "./contact/contact.service";
-import {NewContactModule} from "./new-contact/new-contact.module";
+import {ContactService} from "./pages/contact/contact.service";
+import {NewContactModule} from "./pages/new-contact/new-contact.module";
+import { NgReduxModule, NgRedux } from '@angular-redux/store';
+import { store } from './shared/build-redux-store.service';
 
 @NgModule({
   declarations: [
@@ -31,10 +31,11 @@ import {NewContactModule} from "./new-contact/new-contact.module";
   ],
   providers: [
     ContactService,
-    HttpCacheService,
-    CacheService,
-        {provide: CacheStorageAbstract, useClass:CacheLocalStorage}
-    ],
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<any>) {
+		ngRedux.provideStore(store);
+	}
+ }

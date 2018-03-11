@@ -1,0 +1,8 @@
+import { combineReducers } from "redux";
+import { AppReducer } from "../../pages/app/app.reducer";
+
+
+export default combineReducers({
+	app: AppReducer,
+	contactList: 
+});
